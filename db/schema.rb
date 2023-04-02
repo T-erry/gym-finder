@@ -20,7 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_102728) do
   end
 
   create_table "gyms", force: :cascade do |t|
-    t.string "image"
+    t.binary "image"
     t.string "name"
     t.string "location"
     t.string "operating_hours"
