@@ -1,35 +1,57 @@
 class GymsController < ApplicationController
-    skip_before_action :authorized, only: [:index]
-    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-    rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
+  skip_before_action :authorized, only: [:index]
 
-    #GET /gyms
-    def index 
-    gyms = Gym.all 
-    render json: gyms, status: :created
-    end
-    def show 
-        gym = Gym.find(params[:id])
-        render json: gym, status: :accepted
-    end
-    def create 
-        gym = Gym.create!(gym_params)
-        render json: {success: "Gym created successfully ", gym: gym}, status: :accepted
-    end
-    def destroy 
-        gym = Gym.find(params[:id])
-        gym.delete 
-        head :no_content
-    end
+  # GET /gyms
+  def index
+    @gyms = Gym.all
 
-    private
-    def gym_params 
-        params.permit(:image, :name, :location, :operating_hours, :price, :admin_id)
+    render json: @gyms, status: :created
+  end
+
+  # GET /gyms/1
+  def show
+    gym = current_admin.gyms.find_by(id: params[:id])
+    if gym
+      render json: gym, status: :created
+    else
+      render json: { error: "Gym not found" }, status: :not_found
     end
-    def record_not_found
-        render json: {errors: "Gym not found"}, status: :created
+  end
+
+  # POST /gyms
+  def create
+    gym = current_admin.gyms.new(gym_params)
+    if gym.save
+      render json: gym , status: :created, location: gym
+    else
+      render json: gym.errors, status: :unprocessable_entity
     end
-    def invalid_record (invalid)
-        render json: {errors: invalid.record.errors.full_messages}, status: :unprocessable_entity
+  end
+
+  # PATCH/PUT /gyms/1
+  def update
+    gym = current_admin.gyms.find_by(id: params[:id])
+      if gym
+        if gym.update(gym_params)
+          render json: gym, status: :ok
+        else
+          render json: { errors: gym.errors.full_messages }, status: :unprocessable_entity
+        end
+      else
+        render json: { error: "Gym not found" }, status: :not_found
+      end
+  end
+
+  # DELETE /gyms/1
+  def destroy
+    gym = current_admin.gyms.find_by(id: params[:id])
+    gym.destroy
+    head :no_content
+  end
+
+  private
+    # Only allow a list of trusted parameters through.
+    def gym_params
+      params.permit(:image, :name, :location, :operating_hours, :price, :admin_id)
     end
 end
