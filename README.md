@@ -1,4 +1,4 @@
-### PHASE 4 CODE CHALLENGE WEEK 1
+### PHASE 4 Project
 
 #### Projects name
 
