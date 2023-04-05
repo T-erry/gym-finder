@@ -4,7 +4,6 @@ class GymsController < ApplicationController
   # GET /gyms
   def index
     @gyms = Gym.all
-
     render json: @gyms, status: :created
   end
 
