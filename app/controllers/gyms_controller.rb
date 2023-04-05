@@ -21,7 +21,7 @@ class GymsController < ApplicationController
   # POST /gyms
   def create
     gym = current_admin.gyms.new(gym_params)
-    if gym.save!
+    if gym.save
       render json: gym , status: :created, location: gym
     else
       render json: gym.errors, status: :unprocessable_entity
