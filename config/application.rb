@@ -22,8 +22,6 @@ module GymFinder
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-    config.secret_key_base = 'blipblapblup'
-
 
     # Configuration for the application, engines, and railties goes here.
     #
