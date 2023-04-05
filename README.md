@@ -2,7 +2,7 @@
 
 #### Projects name
 
-    - Gym Finder
+ Gym Finder is an application to help gym owners manage their gyms. In this project the owners are represented as admins who are going to perform crud operations. This includes create a new gym, update an delete
 
 #### author information
 
