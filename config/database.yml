@@ -22,11 +22,6 @@ test:
   database: db/test.sqlite3
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
-  host: dpg-cgmlv3o2qv26cuq73kh0-a
   database: gym_mwaj
   username: gym_mwaj_user
-  password: edMk0liZCmsfYZvPymUbp7wGjLqHK9q0
+  password: <%= ENV['edMk0liZCmsfYZvPymUbp7wGjLqHK9q0'] %>
