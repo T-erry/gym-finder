@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 # Create some sample admins
- Admin.create(adminname: "admin1", email: "admin1@gmail.com", password: "admin12")
- Admin.create(adminname: "admin2", email: "admin2@gmail.com", password: "admin123")
+ Admin.create!(adminname: "admin1", email: "admin1@gmail.com", password: "admin12")
+ Admin.create!(adminname: "admin2", email: "admin2@gmail.com", password: "admin123")
 
 # Create some sample gyms
 gyms = [
